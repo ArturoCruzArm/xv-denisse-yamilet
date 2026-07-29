@@ -494,6 +494,7 @@ address { margin: 16px 0 24px; color: var(--mist); font-style: normal; }
 .split-icon { display: block; margin-bottom: 20px; color: var(--champagne-light); font-size: 2.2rem; }
 .pending-copy { color: var(--mist); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .palette-copy { color: var(--mist); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.palette-panel .center-copy { margin: 0 auto 14px; }
 .palette-swatches { display: flex; justify-content: center; gap: 9px; margin-top: 22px; }
 .palette-swatches span {
   width: 31px;
