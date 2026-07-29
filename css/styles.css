@@ -1,12 +1,12 @@
 :root {
-  --midnight: #405238;
-  --navy: #617455;
-  --blue: #9caf84;
+  --midnight: #647a5c;
+  --navy: #829779;
+  --blue: #b6c8a3;
   --pearl: #fffdf4;
   --champagne: #c49b4a;
   --champagne-light: #f3d995;
-  --mist: #edf3df;
-  --ink: #35422e;
+  --mist: #f4f8ea;
+  --ink: #3e5137;
   --line: rgba(218, 178, 91, .5);
 }
 
@@ -17,8 +17,8 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 50% -5%, rgba(224, 237, 197, .68), transparent 34rem),
-    linear-gradient(145deg, #52664a, #849879 52%, #465a3f);
+    radial-gradient(circle at 50% -5%, rgba(246, 251, 230, .8), transparent 34rem),
+    linear-gradient(145deg, #71876a, #a9bc9d 52%, #61775a);
   color: var(--pearl);
   font-family: "Manrope", sans-serif;
   line-height: 1.65;
@@ -78,8 +78,8 @@ button { border: 0; }
   overflow: hidden;
   cursor: pointer;
   background:
-    radial-gradient(circle at 50% 42%, rgba(221, 234, 192, .84), transparent 27rem),
-    linear-gradient(150deg, #405137, #829675 55%, #4c6043);
+    radial-gradient(circle at 50% 42%, rgba(244, 249, 222, .9), transparent 27rem),
+    linear-gradient(150deg, #607557, #a9bd9b 55%, #708667);
   transition: opacity 1s ease, visibility 1s ease;
 }
 
@@ -124,7 +124,7 @@ button { border: 0; }
   border: 1px solid rgba(241, 217, 158, .75);
   background:
     linear-gradient(125deg, rgba(255,255,255,.07), transparent 28%),
-    linear-gradient(155deg, rgba(156,177,130,.98), rgba(72,91,62,.98));
+    linear-gradient(155deg, rgba(187,205,160,.98), rgba(94,116,84,.98));
   box-shadow:
     0 0 0 7px rgba(49,65,42,.88),
     0 0 0 8px rgba(217,183,110,.24),
@@ -562,6 +562,13 @@ address { margin: 16px 0 24px; color: var(--mist); font-style: normal; }
 .palette-swatches span:nth-child(5) { background: #fff6df; }
 
 .rsvp-intro { margin: 0 auto 30px; }
+.rsvp-contact {
+  margin: -16px auto 28px;
+  color: var(--champagne-light);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
 .personalized-welcome {
   max-width: 650px;
   margin: 0 auto 28px;
