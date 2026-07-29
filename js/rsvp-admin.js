@@ -19,6 +19,7 @@
   const status = document.getElementById("formStatus");
   const search = document.getElementById("searchGuests");
   const filter = document.getElementById("statusFilter");
+  const categoryFilter = document.getElementById("categoryFilter");
 
   async function request(path, options = {}) {
     const response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
@@ -73,10 +74,13 @@
     summary();
     const query = search.value.trim().toLowerCase();
     const state = filter.value;
+    const category = categoryFilter.value;
     const visible = guests.filter(guest =>
       (!query || guest.nombre.toLowerCase().includes(query)) &&
-      (state === "all" || guest.status === state)
+      (state === "all" || guest.status === state) &&
+      (category === "all" || guest.categoria === category)
     );
+    setText("listSummary", `${visible.length} de ${guests.length} invitaciones · ${visible.reduce((sum, guest) => sum + (guest.pases_asignados || 0), 0)} pases visibles`);
     if (!visible.length) {
       rows.innerHTML = '<tr><td colspan="6" class="empty-row">No hay invitados en esta vista.</td></tr>';
       return;
@@ -93,7 +97,11 @@
         <td>${response}${guest.mensaje ? `<span class="guest-meta">${escapeHtml(guest.mensaje)}</span>` : ""}</td>
         <td><div class="actions">
           <button class="action action-wa" data-action="whatsapp" data-id="${guest.id}">WhatsApp</button>
+          <a class="action" href="${invitationLink(guest)}" target="_blank" rel="noopener noreferrer">Abrir</a>
           <button class="action" data-action="copy" data-id="${guest.id}">Copiar enlace</button>
+          <button class="action action-confirm" data-action="confirm" data-id="${guest.id}">Confirmar</button>
+          <button class="action action-decline" data-action="decline" data-id="${guest.id}">Declinar</button>
+          <button class="action" data-action="reset" data-id="${guest.id}">Restablecer</button>
           <button class="action" data-action="edit" data-id="${guest.id}">Editar</button>
           <button class="action action-danger" data-action="delete" data-id="${guest.id}">Eliminar</button>
         </div></td>
@@ -149,6 +157,74 @@
     document.getElementById("saveGuest").textContent = "Guardar invitado";
   }
 
+  async function setResponse(guest, response) {
+    const now = new Date().toISOString();
+    const updates = response === "confirmada"
+      ? { status: "confirmada", asiste: true, pases_confirmados: guest.pases_asignados, fecha_confirmacion: now }
+      : response === "declinada"
+        ? { status: "declinada", asiste: false, pases_confirmados: 0, fecha_confirmacion: now }
+        : { status: "pendiente", asiste: null, pases_confirmados: null, fecha_confirmacion: null, fecha_envio: null, fecha_vista: null };
+    await request(`invitados?id=eq.${guest.id}`, {
+      method: "PATCH",
+      headers: { Prefer: "return=representation" },
+      body: JSON.stringify(updates)
+    });
+    Object.assign(guest, updates);
+    render();
+  }
+
+  function parseCsvLine(line) {
+    const values = [];
+    let value = "";
+    let quoted = false;
+    for (let index = 0; index < line.length; index += 1) {
+      const char = line[index];
+      if (char === '"' && quoted && line[index + 1] === '"') { value += '"'; index += 1; }
+      else if (char === '"') quoted = !quoted;
+      else if (char === "," && !quoted) { values.push(value.trim()); value = ""; }
+      else value += char;
+    }
+    values.push(value.trim());
+    return values;
+  }
+
+  async function importCsv(file) {
+    const lines = (await file.text()).replace(/^\uFEFF/, "").split(/\r?\n/).filter(line => line.trim());
+    if (lines.length < 2) throw new Error("El CSV no contiene registros.");
+    const columns = parseCsvLine(lines[0]).map(column => column.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+    const column = (...names) => columns.findIndex(item => names.includes(item));
+    const nameIndex = column("nombre", "nombre completo", "invitado");
+    if (nameIndex < 0) throw new Error("El CSV necesita una columna Nombre.");
+    const phoneIndex = column("telefono", "whatsapp", "celular");
+    const categoryIndex = column("categoria");
+    const passesIndex = column("pases", "numero de pases");
+    const tableIndex = column("mesa");
+    const notesIndex = column("notas");
+    const allowedCategories = ["familia", "padrinos", "amigos", "conocidos", "otro"];
+    const payload = lines.slice(1).map(line => {
+      const values = parseCsvLine(line);
+      const category = (values[categoryIndex] || "otro").toLowerCase();
+      return {
+        evento_id: eventId,
+        nombre: values[nameIndex]?.trim(),
+        telefono: phoneIndex >= 0 ? values[phoneIndex]?.trim() || null : null,
+        categoria: allowedCategories.includes(category) ? category : "otro",
+        pases_asignados: Math.max(1, Math.min(20, Number(values[passesIndex]) || 1)),
+        mesa_asignada: tableIndex >= 0 ? values[tableIndex]?.trim() || null : null,
+        notas: notesIndex >= 0 ? values[notesIndex]?.trim() || null : null
+      };
+    }).filter(item => item.nombre);
+    if (!payload.length) throw new Error("No se encontraron nombres válidos.");
+    const created = await request("invitados", {
+      method: "POST",
+      headers: { Prefer: "return=representation" },
+      body: JSON.stringify(payload)
+    });
+    guests.push(...created);
+    render();
+    return created.length;
+  }
+
   form.addEventListener("submit", async event => {
     event.preventDefault();
     const id = document.getElementById("guestId").value;
@@ -200,6 +276,9 @@
       button.textContent = "Copiado";
       setTimeout(() => { button.textContent = "Copiar enlace"; }, 1200);
     }
+    if (button.dataset.action === "confirm") await setResponse(guest, "confirmada");
+    if (button.dataset.action === "decline") await setResponse(guest, "declinada");
+    if (button.dataset.action === "reset") await setResponse(guest, "pendiente");
     if (button.dataset.action === "edit") startEdit(guest);
     if (button.dataset.action === "delete" && confirm(`¿Eliminar a ${guest.nombre}?`)) {
       await request(`invitados?id=eq.${guest.id}`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
@@ -211,6 +290,24 @@
   document.getElementById("cancelEdit").addEventListener("click", resetForm);
   search.addEventListener("input", render);
   filter.addEventListener("change", render);
+  categoryFilter.addEventListener("change", render);
+  document.getElementById("refreshButton").addEventListener("click", load);
+  document.getElementById("printButton").addEventListener("click", () => window.print());
+  document.getElementById("importButton").addEventListener("click", () => document.getElementById("importFile").click());
+  document.getElementById("importFile").addEventListener("change", async event => {
+    const file = event.target.files[0];
+    if (!file) return;
+    status.className = "form-status";
+    status.textContent = "Importando…";
+    try {
+      const count = await importCsv(file);
+      status.textContent = `${count} ${count === 1 ? "invitado importado" : "invitados importados"}.`;
+    } catch (error) {
+      status.className = "form-status error";
+      status.textContent = error.message;
+    }
+    event.target.value = "";
+  });
   document.getElementById("exportButton").addEventListener("click", () => {
     const values = [["Nombre", "Telefono", "Categoria", "Pases", "Mesa", "Estado", "Confirmados", "Mensaje"]];
     guests.forEach(g => values.push([g.nombre, g.telefono || "", g.categoria || "", g.pases_asignados, g.mesa_asignada || "", g.status, g.pases_confirmados || "", g.mensaje || ""]));

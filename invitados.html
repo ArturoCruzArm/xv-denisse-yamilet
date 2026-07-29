@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/invitados.css?v=1">
+  <link rel="stylesheet" href="css/invitados.css?v=2">
 </head>
 <body>
   <header class="admin-hero">
@@ -34,7 +34,13 @@
           <p>NUEVA INVITACIÓN</p>
           <h2>Agregar invitado</h2>
         </div>
-        <button type="button" class="secondary-button" id="exportButton">Exportar CSV</button>
+        <div class="toolbar">
+          <button type="button" class="secondary-button" id="refreshButton">Actualizar</button>
+          <button type="button" class="secondary-button" id="importButton">Importar CSV</button>
+          <button type="button" class="secondary-button" id="exportButton">Exportar CSV</button>
+          <button type="button" class="secondary-button" id="printButton">Imprimir</button>
+          <input type="file" id="importFile" accept=".csv,text/csv" hidden>
+        </div>
       </div>
       <form id="guestForm" class="guest-form">
         <input type="hidden" id="guestId">
@@ -76,8 +82,17 @@
             <option value="confirmada">Confirmadas</option>
             <option value="declinada">Declinadas</option>
           </select>
+          <select id="categoryFilter" aria-label="Filtrar por categoría">
+            <option value="all">Todas las categorías</option>
+            <option value="familia">Familia</option>
+            <option value="padrinos">Padrinos</option>
+            <option value="amigos">Amigos</option>
+            <option value="conocidos">Conocidos</option>
+            <option value="otro">Otro</option>
+          </select>
         </div>
       </div>
+      <p class="list-summary" id="listSummary"></p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -94,6 +109,6 @@
   <template id="emptyTemplate">
     <tr><td colspan="6" class="empty-row">No hay invitados en esta vista.</td></tr>
   </template>
-  <script src="js/rsvp-admin.js?v=1"></script>
+  <script src="js/rsvp-admin.js?v=2"></script>
 </body>
 </html>
