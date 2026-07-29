@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=5">
 </head>
 <body>
   <div class="intro" id="intro" role="button" tabindex="0" aria-label="Abrir invitación">
@@ -134,6 +134,54 @@
       </div>
     </section>
 
+    <section class="panel rsvp-panel reveal" id="rsvp">
+      <p class="section-kicker">CONFIRMA TU ASISTENCIA</p>
+      <h2>Queremos contar contigo</h2>
+      <p class="center-copy rsvp-intro">Registra tu respuesta y enseguida podrás enviarla por WhatsApp.</p>
+
+      <div class="personalized-welcome" id="personalizedWelcome" hidden>
+        <span aria-hidden="true">✦</span>
+        <strong id="guestWelcomeText"></strong>
+        <p id="guestPassesText"></p>
+      </div>
+
+      <form class="rsvp-form" id="rsvpForm">
+        <label>
+          <span>Nombre completo</span>
+          <input id="rsvpName" name="name" type="text" autocomplete="name" required>
+        </label>
+        <div class="rsvp-grid">
+          <label>
+            <span>¿Nos acompañas?</span>
+            <select id="rsvpAttendance" name="attendance" required>
+              <option value="">Selecciona una opción</option>
+              <option value="si">Sí, asistiré</option>
+              <option value="no">No podré asistir</option>
+            </select>
+          </label>
+          <label>
+            <span>Número de personas</span>
+            <select id="rsvpGuests" name="guests" required>
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          <span>Mensaje para Denisse <small>(opcional)</small></span>
+          <textarea id="rsvpMessage" name="message" rows="3" placeholder="Escribe aquí tus buenos deseos"></textarea>
+        </label>
+        <button class="rsvp-submit" type="submit" id="rsvpSubmit">Confirmar y enviar por WhatsApp</button>
+        <p class="rsvp-note">Tu respuesta se guardará y WhatsApp abrirá con el mensaje listo para enviar.</p>
+      </form>
+
+      <div class="rsvp-result" id="rsvpResult" role="status" aria-live="polite" hidden></div>
+    </section>
+
     <section class="share reveal">
       <p>19 · 09 · 2026</p>
       <h2>Comparte esta fecha</h2>
@@ -147,6 +195,7 @@
     </footer>
   </main>
 
-  <script src="js/app.js?v=3"></script>
+  <script src="js/app.js?v=4"></script>
+  <script src="js/rsvp.js?v=1"></script>
 </body>
 </html>

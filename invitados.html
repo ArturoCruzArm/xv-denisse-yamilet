@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#25301b">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Invitados · XV de Denisse Yamilet</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/invitados.css?v=1">
+</head>
+<body>
+  <header class="admin-hero">
+    <a href="/" class="back-link">← Ver invitación</a>
+    <p>19 · 09 · 2026</p>
+    <h1>Invitados de Denisse</h1>
+    <span>Control de pases y confirmaciones</span>
+  </header>
+
+  <main class="admin-shell">
+    <section class="stats" aria-label="Resumen">
+      <article><span>Invitaciones</span><strong id="totalGuests">0</strong><small id="totalPasses">0 pases</small></article>
+      <article><span>Confirmadas</span><strong id="confirmedGuests">0</strong><small id="confirmedPasses">0 personas</small></article>
+      <article><span>Sin respuesta</span><strong id="pendingGuests">0</strong><small>por confirmar</small></article>
+      <article><span>No asistirán</span><strong id="declinedGuests">0</strong><small>respuestas</small></article>
+    </section>
+
+    <section class="admin-card">
+      <div class="section-title">
+        <div>
+          <p>NUEVA INVITACIÓN</p>
+          <h2>Agregar invitado</h2>
+        </div>
+        <button type="button" class="secondary-button" id="exportButton">Exportar CSV</button>
+      </div>
+      <form id="guestForm" class="guest-form">
+        <input type="hidden" id="guestId">
+        <label><span>Nombre completo</span><input id="guestName" type="text" required></label>
+        <label><span>WhatsApp</span><input id="guestPhone" type="tel" inputmode="tel" placeholder="479 123 4567"></label>
+        <label><span>Categoría</span>
+          <select id="guestCategory">
+            <option value="familia">Familia</option>
+            <option value="padrinos">Padrinos</option>
+            <option value="amigos">Amigos</option>
+            <option value="conocidos">Conocidos</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+        <label><span>Pases</span><input id="guestPasses" type="number" min="1" max="20" value="1" required></label>
+        <label><span>Mesa</span><input id="guestTable" type="text" placeholder="Ej. 5"></label>
+        <label class="notes-field"><span>Notas</span><input id="guestNotes" type="text" placeholder="Alergias, indicaciones…"></label>
+        <div class="form-actions">
+          <button type="button" class="secondary-button" id="cancelEdit" hidden>Cancelar</button>
+          <button type="submit" class="primary-button" id="saveGuest">Guardar invitado</button>
+        </div>
+      </form>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="admin-card">
+      <div class="section-title list-title">
+        <div>
+          <p>LISTA GENERAL</p>
+          <h2>Invitados</h2>
+        </div>
+        <div class="list-tools">
+          <input id="searchGuests" type="search" placeholder="Buscar por nombre">
+          <select id="statusFilter" aria-label="Filtrar por estado">
+            <option value="all">Todos</option>
+            <option value="pendiente">Pendientes</option>
+            <option value="enviada">Enviadas</option>
+            <option value="vista">Vistas</option>
+            <option value="confirmada">Confirmadas</option>
+            <option value="declinada">Declinadas</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Invitado</th><th>Pases</th><th>Mesa</th><th>Estado</th><th>Respuesta</th><th>Acciones</th></tr>
+          </thead>
+          <tbody id="guestRows">
+            <tr><td colspan="6" class="empty-row">Cargando invitados…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <template id="emptyTemplate">
+    <tr><td colspan="6" class="empty-row">No hay invitados en esta vista.</td></tr>
+  </template>
+  <script src="js/rsvp-admin.js?v=1"></script>
+</body>
+</html>
