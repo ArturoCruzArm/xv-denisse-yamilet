@@ -10,9 +10,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body>
+  <audio id="backgroundMusic" preload="metadata" loop>
+    <source src="audio/una-noche-para-recordar.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-control" id="musicControl" type="button" aria-label="Pausar música" aria-pressed="true" hidden>
+    <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span id="musicControlText">Pausar música</span>
+  </button>
+
   <div class="intro" id="intro" role="button" tabindex="0" aria-label="Abrir invitación">
     <div class="intro-stars" aria-hidden="true"></div>
     <div class="intro-card">
@@ -210,7 +219,7 @@
     </footer>
   </main>
 
-  <script src="js/app.js?v=4"></script>
+  <script src="js/app.js?v=5"></script>
   <script src="js/rsvp.js?v=1"></script>
 </body>
 </html>

@@ -3,12 +3,38 @@
 
   const intro = document.getElementById("intro");
   const invitation = document.getElementById("invitation");
+  const music = document.getElementById("backgroundMusic");
+  const musicControl = document.getElementById("musicControl");
+  const musicControlText = document.getElementById("musicControlText");
   let opened = false;
+
+  function updateMusicControl(isPlaying) {
+    musicControl.classList.toggle("playing", isPlaying);
+    musicControl.setAttribute("aria-pressed", String(isPlaying));
+    musicControl.setAttribute("aria-label", isPlaying ? "Pausar música" : "Reproducir música");
+    musicControlText.textContent = isPlaying ? "Pausar música" : "Reproducir música";
+  }
+
+  async function startMusic() {
+    music.volume = 0;
+    musicControl.hidden = false;
+    try {
+      await music.play();
+      updateMusicControl(true);
+      const fade = window.setInterval(() => {
+        music.volume = Math.min(.72, music.volume + .06);
+        if (music.volume >= .72) window.clearInterval(fade);
+      }, 100);
+    } catch (_) {
+      updateMusicControl(false);
+    }
+  }
 
   function openInvitation() {
     if (opened) return;
     opened = true;
     intro.classList.add("opening");
+    startMusic();
 
     setTimeout(() => {
       invitation.classList.add("visible");
@@ -25,6 +51,20 @@
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       openInvitation();
+    }
+  });
+
+  musicControl.addEventListener("click", async () => {
+    if (music.paused) {
+      try {
+        await music.play();
+        updateMusicControl(true);
+      } catch (_) {
+        updateMusicControl(false);
+      }
+    } else {
+      music.pause();
+      updateMusicControl(false);
     }
   });
 

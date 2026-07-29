@@ -41,6 +41,33 @@ button, a { font: inherit; }
 a { color: inherit; }
 button { border: 0; }
 
+.music-control {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 15px;
+  cursor: pointer;
+  border: 1px solid rgba(243,217,149,.72);
+  border-radius: 999px;
+  background: rgba(55,72,48,.9);
+  color: var(--pearl);
+  box-shadow: 0 12px 36px rgba(30,42,25,.34);
+  backdrop-filter: blur(12px);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+.music-control[hidden] { display: none; }
+.music-bars { height: 16px; display: flex; align-items: flex-end; gap: 2px; }
+.music-bars i { width: 2px; height: 7px; background: var(--champagne-light); }
+.music-control.playing .music-bars i { animation: music-wave .8s ease-in-out infinite alternate; }
+.music-control.playing .music-bars i:nth-child(2) { animation-delay: -.4s; }
+.music-control.playing .music-bars i:nth-child(3) { animation-delay: -.2s; }
+
 .intro {
   position: fixed;
   inset: 0;
@@ -630,6 +657,7 @@ footer span { display: block; margin-top: 14px; font-size: .66rem; letter-spacin
 @keyframes orbit { from { transform: translate(-50%,-50%) rotate(0) translateX(125px) rotate(0); } to { transform: translate(-50%,-50%) rotate(360deg) translateX(125px) rotate(-360deg); } }
 @keyframes hint { 50% { opacity: .45; } }
 @keyframes bob { 50% { transform: translateY(7px); } }
+@keyframes music-wave { to { height: 16px; } }
 
 :focus-visible { outline: 2px solid var(--champagne-light); outline-offset: 5px; }
 
