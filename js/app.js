@@ -135,22 +135,4 @@
     elements.forEach(element => observer.observe(element));
   }
 
-  document.getElementById("shareButton").addEventListener("click", async () => {
-    const shareData = {
-      title: "Mis XV · Denisse Yamilet",
-      text: "Acompáñame a celebrar mis XV años el 19 de septiembre de 2026.",
-      url: window.location.href
-    };
-    if (navigator.share) {
-      try { await navigator.share(shareData); } catch (_) {}
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      const button = document.getElementById("shareButton");
-      const original = button.textContent;
-      button.textContent = "Enlace copiado";
-      setTimeout(() => { button.textContent = original; }, 1800);
-    } catch (_) {}
-  });
 })();

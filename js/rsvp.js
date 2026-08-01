@@ -15,7 +15,6 @@
   if (!form) return;
 
   const nameInput = document.getElementById("rsvpName");
-  const attendanceInput = document.getElementById("rsvpAttendance");
   const guestsInput = document.getElementById("rsvpGuests");
   const messageInput = document.getElementById("rsvpMessage");
   const submitButton = document.getElementById("rsvpSubmit");
@@ -141,11 +140,11 @@
     event.preventDefault();
     const data = {
       name: nameInput.value.trim(),
-      attends: attendanceInput.value === "si",
+      attends: true,
       passes: Number(guestsInput.value) || 1,
       message: messageInput.value.trim()
     };
-    if (!data.name || !attendanceInput.value) return;
+    if (!data.name) return;
 
     submitButton.disabled = true;
     submitButton.textContent = "Guardando respuesta…";

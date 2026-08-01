@@ -9,8 +9,8 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=11">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Italiana&family=Manrope:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=12">
 </head>
 <body>
   <div id="youtubePlayer" aria-hidden="true"></div>
@@ -75,12 +75,34 @@
       </div>
     </section>
 
+    <section class="story-beat reveal">
+      <button class="story-photo" type="button" data-photo="assets/fotos/denisse-recuerdo-02.webp" aria-label="Ver fotografía de los primeros años de Denisse">
+        <img src="assets/fotos/denisse-recuerdo-02-thumb.webp" alt="Denisse durante sus primeros años" loading="lazy">
+      </button>
+      <div class="story-copy">
+        <span>01 · MIS PRIMEROS AÑOS</span>
+        <h2>Donde comenzó mi historia</h2>
+        <p>Con pequeños pasos, grandes sonrisas y una familia que siempre ha llenado mi vida de amor.</p>
+      </div>
+    </section>
+
     <section class="family reveal">
       <div class="family-mark" aria-hidden="true">M</div>
       <div>
         <p class="section-kicker">CON LA BENDICIÓN DE</p>
         <h2>Mi mamá</h2>
         <p class="featured-name">Mónica Gómez Gutiérrez</p>
+      </div>
+    </section>
+
+    <section class="story-beat story-beat-reverse reveal">
+      <button class="story-photo" type="button" data-photo="assets/fotos/denisse-recuerdo-03.webp" aria-label="Ver fotografía de la infancia de Denisse">
+        <img src="assets/fotos/denisse-recuerdo-03-thumb.webp" alt="Denisse sonriendo durante su infancia" loading="lazy">
+      </button>
+      <div class="story-copy">
+        <span>02 · MI INFANCIA</span>
+        <h2>Recuerdos llenos de alegría</h2>
+        <p>Cada juego, cada abrazo y cada momento especial se convirtió en parte de quien soy.</p>
       </div>
     </section>
 
@@ -106,11 +128,23 @@
         <div class="event-content">
           <p class="event-type">RECEPCIÓN</p>
           <h3>Quinta San Francisco</h3>
+          <p class="event-room">Salón #2</p>
           <p class="event-time">5:30–6:00 p. m.</p>
           <address>P.º de los Ángeles y Medina 314,<br>León, Gto. 37235</address>
           <a class="map-action" href="https://maps.google.com/maps/search/Quinta%20San%20Francisco/@21.13904639,-101.63363475,17z?hl=es" target="_blank" rel="noopener noreferrer">Ver ubicación</a>
         </div>
       </article>
+    </section>
+
+    <section class="story-beat reveal">
+      <button class="story-photo" type="button" data-photo="assets/fotos/denisse-recuerdo-01.webp" aria-label="Ver fotografía de Denisse creciendo">
+        <img src="assets/fotos/denisse-recuerdo-01-thumb.webp" alt="Denisse durante una etapa de su infancia" loading="lazy">
+      </button>
+      <div class="story-copy">
+        <span>03 · CRECIENDO</span>
+        <h2>Cada recuerdo me trajo hasta aquí</h2>
+        <p>Los años pasaron dejando aprendizajes, ilusiones y momentos que guardaré siempre en el corazón.</p>
+      </div>
     </section>
 
     <section class="panel reveal">
@@ -125,7 +159,7 @@
         <div class="timeline-row">
           <time>5:30–6:00</time>
           <span class="timeline-dot"></span>
-          <div><strong>Recepción</strong><p>Quinta San Francisco</p></div>
+          <div><strong>Recepción</strong><p>Quinta San Francisco · Salón #2</p></div>
         </div>
         <div class="timeline-row">
           <time>6:00–7:00</time>
@@ -150,27 +184,14 @@
       </article>
     </section>
 
-    <section class="memories reveal" aria-labelledby="memoriesTitle">
-      <div class="memories-heading">
-        <p class="section-kicker">UN CAMINO LLENO DE RECUERDOS</p>
-        <h2 id="memoriesTitle">Así comenzó mi historia</h2>
-        <p>Momentos que guardo en el corazón y que hoy me acompañan al celebrar mis quince años.</p>
-      </div>
-      <div class="memory-grid">
-        <button class="memory-card memory-current" type="button" data-photo="assets/fotos/denisse-actual.webp" aria-label="Ver retrato actual de Denisse">
-          <img src="assets/fotos/denisse-actual-thumb.webp" alt="Retrato actual de Denisse" loading="lazy">
-          <span>Hoy</span>
-        </button>
-        <button class="memory-card memory-one" type="button" data-photo="assets/fotos/denisse-recuerdo-01.webp" aria-label="Ver recuerdo de la infancia de Denisse">
-          <img src="assets/fotos/denisse-recuerdo-01-thumb.webp" alt="Denisse durante su infancia" loading="lazy">
-          <span>Mis recuerdos</span>
-        </button>
-        <button class="memory-card memory-two" type="button" data-photo="assets/fotos/denisse-recuerdo-02.webp" aria-label="Ver recuerdo de la infancia de Denisse">
-          <img src="assets/fotos/denisse-recuerdo-02-thumb.webp" alt="Retrato de Denisse cuando era pequeña" loading="lazy">
-        </button>
-        <button class="memory-card memory-three" type="button" data-photo="assets/fotos/denisse-recuerdo-03.webp" aria-label="Ver recuerdo de la infancia de Denisse">
-          <img src="assets/fotos/denisse-recuerdo-03-thumb.webp" alt="Denisse sonriendo durante su infancia" loading="lazy">
-        </button>
+    <section class="story-beat story-beat-reverse reveal">
+      <button class="story-photo" type="button" data-photo="assets/fotos/denisse-actual.webp" aria-label="Ver retrato actual de Denisse">
+        <img src="assets/fotos/denisse-actual-thumb.webp" alt="Retrato actual de Denisse" loading="lazy">
+      </button>
+      <div class="story-copy">
+        <span>04 · HOY</span>
+        <h2>Comienza un nuevo sueño</h2>
+        <p>Hoy celebro mis quince años rodeada de las personas que hacen especial mi vida.</p>
       </div>
     </section>
 
@@ -198,15 +219,7 @@
           <span>Nombre completo</span>
           <input id="rsvpName" name="name" type="text" autocomplete="name" required>
         </label>
-        <div class="rsvp-grid">
-          <label>
-            <span>¿Nos acompañas?</span>
-            <select id="rsvpAttendance" name="attendance" required>
-              <option value="">Selecciona una opción</option>
-              <option value="si">Sí, asistiré</option>
-              <option value="no">No podré asistir</option>
-            </select>
-          </label>
+        <div class="rsvp-grid rsvp-grid-single">
           <label>
             <span>Número de personas</span>
             <select id="rsvpGuests" name="guests" required>
@@ -230,12 +243,6 @@
       <div class="rsvp-result" id="rsvpResult" role="status" aria-live="polite" hidden></div>
     </section>
 
-    <section class="share reveal">
-      <p>19 · 09 · 2026</p>
-      <h2>Comparte esta fecha</h2>
-      <button type="button" id="shareButton">Compartir invitación</button>
-    </section>
-
     <footer>
       <p class="footer-script">Denisse Yamilet</p>
       <p>Nos vemos el 19 de septiembre</p>
@@ -248,7 +255,7 @@
     <img id="lightboxImage" src="" alt="Fotografía ampliada de Denisse">
   </dialog>
 
-  <script src="js/app.js?v=6"></script>
-  <script src="js/rsvp.js?v=1"></script>
+  <script src="js/app.js?v=7"></script>
+  <script src="js/rsvp.js?v=2"></script>
 </body>
 </html>
