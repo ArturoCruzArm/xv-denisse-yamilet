@@ -10,12 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=10">
+  <link rel="stylesheet" href="css/styles.css?v=11">
 </head>
 <body>
-  <audio id="backgroundMusic" preload="metadata" loop>
-    <source src="audio/una-noche-para-recordar.mp3" type="audio/mpeg">
-  </audio>
+  <div id="youtubePlayer" aria-hidden="true"></div>
+  <script defer src="https://www.youtube.com/iframe_api"></script>
 
   <button class="music-control" id="musicControl" type="button" aria-label="Pausar música" aria-pressed="true" hidden>
     <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -151,19 +150,35 @@
       </article>
     </section>
 
-    <section class="panel palette-panel reveal">
-      <span class="split-icon" aria-hidden="true">◌</span>
-      <p class="section-kicker">PALETA DEL EVENTO</p>
-      <h2>Pistache y dorado</h2>
-      <p class="center-copy">El vestido de Denisse será verde pistache.</p>
-      <p class="palette-copy">Sin temática · Tonos fijos</p>
-      <div class="palette-swatches" aria-label="Verde pistache, verde salvia, verde oliva, dorado y marfil">
-        <span title="Pistache"></span>
-        <span title="Salvia"></span>
-        <span title="Oliva"></span>
-        <span title="Dorado"></span>
-        <span title="Marfil"></span>
+    <section class="memories reveal" aria-labelledby="memoriesTitle">
+      <div class="memories-heading">
+        <p class="section-kicker">UN CAMINO LLENO DE RECUERDOS</p>
+        <h2 id="memoriesTitle">Así comenzó mi historia</h2>
+        <p>Momentos que guardo en el corazón y que hoy me acompañan al celebrar mis quince años.</p>
       </div>
+      <div class="memory-grid">
+        <button class="memory-card memory-current" type="button" data-photo="assets/fotos/denisse-actual.webp" aria-label="Ver retrato actual de Denisse">
+          <img src="assets/fotos/denisse-actual-thumb.webp" alt="Retrato actual de Denisse" loading="lazy">
+          <span>Hoy</span>
+        </button>
+        <button class="memory-card memory-one" type="button" data-photo="assets/fotos/denisse-recuerdo-01.webp" aria-label="Ver recuerdo de la infancia de Denisse">
+          <img src="assets/fotos/denisse-recuerdo-01-thumb.webp" alt="Denisse durante su infancia" loading="lazy">
+          <span>Mis recuerdos</span>
+        </button>
+        <button class="memory-card memory-two" type="button" data-photo="assets/fotos/denisse-recuerdo-02.webp" aria-label="Ver recuerdo de la infancia de Denisse">
+          <img src="assets/fotos/denisse-recuerdo-02-thumb.webp" alt="Retrato de Denisse cuando era pequeña" loading="lazy">
+        </button>
+        <button class="memory-card memory-three" type="button" data-photo="assets/fotos/denisse-recuerdo-03.webp" aria-label="Ver recuerdo de la infancia de Denisse">
+          <img src="assets/fotos/denisse-recuerdo-03-thumb.webp" alt="Denisse sonriendo durante su infancia" loading="lazy">
+        </button>
+      </div>
+    </section>
+
+    <section class="panel dress-code-panel reveal">
+      <span class="dress-code-icon" aria-hidden="true">♢</span>
+      <p class="section-kicker">CÓDIGO DE VESTIMENTA</p>
+      <h2>Formal</h2>
+      <p class="center-copy">Se reserva el color <strong>verde pistache</strong> para la quinceañera.</p>
     </section>
 
     <section class="panel rsvp-panel reveal" id="rsvp">
@@ -228,7 +243,12 @@
     </footer>
   </main>
 
-  <script src="js/app.js?v=5"></script>
+  <dialog class="photo-lightbox" id="photoLightbox" aria-label="Fotografía de Denisse">
+    <button type="button" id="closeLightbox" aria-label="Cerrar fotografía">×</button>
+    <img id="lightboxImage" src="" alt="Fotografía ampliada de Denisse">
+  </dialog>
+
+  <script src="js/app.js?v=6"></script>
   <script src="js/rsvp.js?v=1"></script>
 </body>
 </html>

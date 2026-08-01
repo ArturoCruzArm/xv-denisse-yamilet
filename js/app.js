@@ -3,9 +3,11 @@
 
   const intro = document.getElementById("intro");
   const invitation = document.getElementById("invitation");
-  const music = document.getElementById("backgroundMusic");
   const musicControl = document.getElementById("musicControl");
   const musicControlText = document.getElementById("musicControlText");
+  let youtubePlayer;
+  let youtubeReady = false;
+  let musicRequested = false;
   let opened = false;
 
   function updateMusicControl(isPlaying) {
@@ -15,19 +17,37 @@
     musicControlText.textContent = isPlaying ? "Pausar música" : "Reproducir música";
   }
 
-  async function startMusic() {
-    music.volume = 0;
+  window.onYouTubeIframeAPIReady = () => {
+    youtubePlayer = new YT.Player("youtubePlayer", {
+      height: "1",
+      width: "1",
+      videoId: "dTMY8sBgAJs",
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        disablekb: 1,
+        loop: 1,
+        playlist: "dTMY8sBgAJs",
+        playsinline: 1,
+        rel: 0
+      },
+      events: {
+        onReady(event) {
+          youtubeReady = true;
+          event.target.setVolume(58);
+          if (musicRequested) event.target.playVideo();
+        },
+        onStateChange(event) {
+          updateMusicControl(event.data === YT.PlayerState.PLAYING);
+        }
+      }
+    });
+  };
+
+  function startMusic() {
+    musicRequested = true;
     musicControl.hidden = false;
-    try {
-      await music.play();
-      updateMusicControl(true);
-      const fade = window.setInterval(() => {
-        music.volume = Math.min(.72, music.volume + .06);
-        if (music.volume >= .72) window.clearInterval(fade);
-      }, 100);
-    } catch (_) {
-      updateMusicControl(false);
-    }
+    if (youtubeReady) youtubePlayer.playVideo();
   }
 
   function openInvitation() {
@@ -54,18 +74,27 @@
     }
   });
 
-  musicControl.addEventListener("click", async () => {
-    if (music.paused) {
-      try {
-        await music.play();
-        updateMusicControl(true);
-      } catch (_) {
-        updateMusicControl(false);
-      }
+  musicControl.addEventListener("click", () => {
+    if (!youtubeReady || youtubePlayer.getPlayerState() !== YT.PlayerState.PLAYING) {
+      musicRequested = true;
+      if (youtubeReady) youtubePlayer.playVideo();
     } else {
-      music.pause();
-      updateMusicControl(false);
+      musicRequested = false;
+      youtubePlayer.pauseVideo();
     }
+  });
+
+  const photoLightbox = document.getElementById("photoLightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  document.querySelectorAll("[data-photo]").forEach(button => {
+    button.addEventListener("click", () => {
+      lightboxImage.src = button.dataset.photo;
+      photoLightbox.showModal();
+    });
+  });
+  document.getElementById("closeLightbox").addEventListener("click", () => photoLightbox.close());
+  photoLightbox.addEventListener("click", event => {
+    if (event.target === photoLightbox) photoLightbox.close();
   });
 
   function startCountdown() {
