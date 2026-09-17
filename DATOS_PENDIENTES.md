@@ -19,9 +19,22 @@
 - Google Maps de la ceremonia: https://maps.google.com/maps/search/Parroquia%20San%20Pedro%20Ap%C3%B3stol/@21.12083498,-101.63637189,17z?hl=es
 - Google Maps de la recepción: https://maps.google.com/maps/search/Quinta%20San%20Francisco/@21.13904639,-101.63363475,17z?hl=es
 
+## Selector de fotos
+
+- `selector.html` — selección privada (noindex). 191 fotos en `img/`
+  con miniatura en `img/thumb/`. La lista se regenera con
+  `python generate_photo_list.py`.
+- `album.html` — álbum de solo lectura para compartir
+  (`album.html?filtro=album`, `?filtro=impresion`, …).
+- Evento en Supabase: slug `xv-denisse-yamilet`, `limite_impresion` 100,
+  `costo_foto_adicional` 15.
+
 ## Pendientes
 
-- Fotografías de la sesión
+- **Confirmar el paquete contratado.** `js/config.js` usa 100 impresiones
+  5x7 + 1 ampliación 50x60 cm, tomado de `eventos.limite_impresion` en
+  Supabase. Si el contrato es de 50 fotos, cambiar `limiteImpresion` en
+  `js/config.js` y la fila del evento en Supabase.
 - Nombre del papá, si se incluirá
 - Padrinos
 - Canción principal
