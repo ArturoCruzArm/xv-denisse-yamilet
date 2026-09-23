@@ -1,7 +1,7 @@
 /* ============================================================
    SELECTOR DE FOTOS — XV Años Denisse Yamilet Gómez Gutiérrez
    Requiere, en este orden:
-     js/config.js  ·  js/photos.js  ·  js/supabase-api.js  ·  js/selector.js
+     js/config.js  ·  js/photos-498.js  ·  js/supabase-api.js  ·  js/selector.js
    ============================================================ */
 (function () {
 'use strict';

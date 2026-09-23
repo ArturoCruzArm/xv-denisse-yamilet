@@ -1,7 +1,7 @@
 /* Service Worker — XV Años Denisse Yamilet Gómez Gutiérrez
    Shell: red primero con respaldo en caché.
    Imágenes: caché primero (las fotos no cambian). */
-const CACHE_SHELL  = 'denisse-shell-v1';
+const CACHE_SHELL  = 'denisse-shell-v2';
 const CACHE_IMAGES = 'denisse-images-v1';
 
 const SHELL = [
@@ -14,7 +14,7 @@ const SHELL = [
     './css/selector.css',
     './css/album.css',
     './js/config.js',
-    './js/photos.js',
+    './js/photos-498.js',
     './js/supabase-api.js',
     './js/selector.js',
     './js/visitas.js',

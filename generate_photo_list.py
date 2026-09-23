@@ -27,7 +27,7 @@ except ImportError:
 AQUI    = os.path.dirname(os.path.abspath(__file__))
 CARPETA = os.path.join(AQUI, 'img')
 THUMBS  = os.path.join(CARPETA, 'thumb')
-SALIDA  = os.path.join(AQUI, 'js', 'photos.js')
+SALIDA  = os.path.join(AQUI, 'js', 'photos-498.js')
 EXTS    = ('.webp', '.jpg', '.jpeg', '.png', '.avif')
 
 CABECERA = """/* ============================================================
@@ -100,7 +100,7 @@ def main():
     print('OK  %d fotos (%d con miniatura) -> %s' % (len(archivos), con_thumb, SALIDA))
     if archivos and con_thumb < len(archivos):
         print('AVISO: %d fotos sin miniatura en img/thumb/' % (len(archivos) - con_thumb))
-    print('Recuerda subir la version del script en los HTML:  js/photos.js?v=N')
+    print('Recuerda subir la version del script en los HTML:  js/photos-NNN.js (renombrar al cambiar)')
     return 0
 
 
